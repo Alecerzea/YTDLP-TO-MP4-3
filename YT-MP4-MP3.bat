@@ -1,41 +1,36 @@
 @echo off
-title Video & Audio Downloader - yt-dlp
-color 0A
+REM Check if yt-dlp is available
+where yt-dlp >nul 2>&1
+if errorlevel 1 (
+    echo yt-dlp is not installed or not in PATH.
+    exit /b 1
+)
 
-:: Output folder = Desktop
-set "OUTPUT_DIR=%USERPROFILE%\Desktop"
+REM Check if ffmpeg is available
+where ffmpeg >nul 2>&1
+if errorlevel 1 (
+    echo ffmpeg is not installed or not in PATH.
+    exit /b 1
+)
 
-:MENU
-cls
-echo ========================================
-echo   VIDEO & AUDIO DOWNLOADER (yt-dlp)
-echo ========================================
+REM Prompt user input
+set /p mediaURL=Enter media URL: 
+set /p type=Is this a video or audio? (v/a): 
+
+REM Get timestamp (seconds since epoch)
+for /f "tokens=1" %%a in ('powershell -Command "(Get-Date -UFormat %%s)"') do set timestamp=%%a
+set filename=download_%timestamp%
+
+if /i "%type%"=="v" (
+    echo [+] Downloading video...
+    yt-dlp -o "%filename%.mp4" --format mp4 "%mediaURL%"
+) else if /i "%type%"=="a" (
+    echo [+] Downloading audio as MP3...
+    yt-dlp -x --audio-format mp3 -o "%filename%.mp3" "%mediaURL%"
+) else (
+    echo Invalid input. Use 'v' for video or 'a' for audio.
+    exit /b 1
+)
+
 echo.
-echo 1. Download Video (MP4 - best quality)
-echo 2. Download Audio (MP3 - 320kbps)
-echo 3. Exit
-echo.
-set /p choice=Select an option [1-3]: 
-
-if "%choice%"=="1" goto VIDEO
-if "%choice%"=="2" goto AUDIO
-if "%choice%"=="3" exit
-goto MENU
-
-:VIDEO
-cls
-set /p url=Enter the video URL: 
-yt-dlp -f "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]" --merge-output-format mp4 -o "%OUTPUT_DIR%\%%(title)s.%%(ext)s" "%url%"
-echo.
-echo [DONE] Video download complete. Saved to Desktop.
-pause
-goto MENU
-
-:AUDIO
-cls
-set /p url=Enter the video URL: 
-yt-dlp -f "bestaudio" --extract-audio --audio-format mp3 --audio-quality 0 -o "%OUTPUT_DIR%\%%(title)s.%%(ext)s" "%url%"
-echo.
-echo [DONE] Audio download complete. Saved to Desktop.
-pause
-goto MENU
+echo [✓] Done.
