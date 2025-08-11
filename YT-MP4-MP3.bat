@@ -1,17 +1,4 @@
 @echo off
-REM Check if yt-dlp is available
-where yt-dlp >nul 2>&1
-if errorlevel 1 (
-    echo yt-dlp is not installed or not in PATH.
-    exit /b 1
-)
-
-REM Check if ffmpeg is available
-where ffmpeg >nul 2>&1
-if errorlevel 1 (
-    echo ffmpeg is not installed or not in PATH.
-    exit /b 1
-)
 
 REM Prompt user input
 set /p mediaURL=Enter media URL: 
