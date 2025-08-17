@@ -12,7 +12,7 @@ if /i "%type%"=="v" (
     echo [+] Downloading video...
     yt-dlp -o "%filename%.mp4" --format mp4 "%mediaURL%"
 ) else if /i "%type%"=="a" (
-    echo [+] Downloading audio as MP3...
+    echo [+] Downloading audio...
     yt-dlp -x --audio-format mp3 -o "%filename%.mp3" "%mediaURL%"
 ) else (
     echo Invalid input. Use 'v' for video or 'a' for audio.
@@ -20,4 +20,5 @@ if /i "%type%"=="v" (
 )
 
 echo.
+
 echo [✓] Done.
