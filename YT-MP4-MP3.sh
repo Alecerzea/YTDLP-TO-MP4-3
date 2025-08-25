@@ -9,10 +9,10 @@ filename="download_$timestamp"
 
 if [ "$type" = "v" ]; then
     echo "[+] Downloading video..."
-    "$YT_DLP" -o "${filename}.mp4" --format mp4 "$mediaURL"
+    yt-dlp -o "${filename}.mp4" -f "bv*+ba" --merge-output-format mp4 --user-agent "Mozilla/5.0" "$mediaURL"
 elif [ "$type" = "a" ]; then
     echo "[+] Downloading audio..."
-    "$YT_DLP" -x --audio-format mp3 -o "${filename}.mp3" "$mediaURL"
+    yt-dlp -x --audio-format mp3 -o "${filename}.mp3" --user-agent "Mozilla/5.0" "$mediaURL"
 else
     echo "Invalid input. Use 'v' for video or 'a' for audio."
     exit 1
