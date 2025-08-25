@@ -6,11 +6,11 @@ $filename = "download_$timestamp"
 
 if ($type -eq "v") {
     Write-Host "[+] Downloading video..."
-    yt-dlp -o "${filename}.mp4" --format mp4 $mediaURL
+    yt-dlp -o "${filename}.mp4" -f "bv*+ba" --merge-output-format mp4 --user-agent "Mozilla/5.0" $mediaURL
 
 } elseif ($type -eq "a") {
     Write-Host "[+] Downloading audio..."
-    yt-dlp -x --audio-format mp3 -o "${filename}.mp3" $mediaURL
+    yt-dlp -x --audio-format mp3 -o "${filename}.mp3" --user-agent "Mozilla/5.0" $mediaURL
 
 } else {
     Write-Host "Invalid input. Use 'v' for video or 'a' for audio."
