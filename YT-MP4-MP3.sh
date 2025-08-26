@@ -1,6 +1,12 @@
 #!/bin/bash
 
-# Prompt user input
+# Verificar si yt-dlp está instalado
+if ! command -v yt-dlp &> /dev/null; then
+    echo "[!] yt-dlp no encontrado. Instalando con pip..."
+    python3 -m pip install -U yt-dlp || { echo "[X] Error al instalar yt-dlp."; exit 1; }
+fi
+
+# Solicitar datos al usuario
 read -rp "Enter media URL: " mediaURL
 read -rp "Is this a video or audio? (v/a): " type
 
