@@ -1,12 +1,24 @@
 @echo off
-REM Prompt user input
+REM Verificar si yt-dlp está instalado
+where yt-dlp >nul 2>&1
+if errorlevel 1 (
+    echo [!] yt-dlp no encontrado. Instalando con pip...
+    python -m pip install -U yt-dlp
+    if errorlevel 1 (
+        echo [X] Error al instalar yt-dlp.
+        exit /b 1
+    )
+)
+
+REM Solicitar URL
 set /p mediaURL=Enter media URL: 
 set /p type=Is this a video or audio? (v/a): 
 
-REM Get timestamp (seconds since epoch)
+REM Obtener timestamp
 for /f "tokens=1" %%a in ('powershell -Command "(Get-Date -UFormat %%s)"') do set timestamp=%%a
 set filename=download_%timestamp%
 
+REM Descargar
 if /i "%type%"=="v" (
     echo [+] Downloading video...
     yt-dlp -o "%filename%.mp4" -f "bv*+ba" --merge-output-format mp4 --user-agent "Mozilla/5.0" "%mediaURL%"
@@ -20,3 +32,4 @@ if /i "%type%"=="v" (
 
 echo.
 echo [✓] Done.
+pause
