@@ -2,8 +2,8 @@
 
 # Verificar si yt-dlp está instalado
 if ! command -v yt-dlp &> /dev/null; then
-    echo "[!] yt-dlp no encontrado. Instalando con pip..."
-    python3 -m pip install -U yt-dlp || { echo "[X] Error al instalar yt-dlp."; exit 1; }
+    echo "[!] yt-dlp not found..."
+    python3 -m pip install -U yt-dlp || { echo "[X] Error"; exit 1; }
 fi
 
 # Solicitar datos al usuario
