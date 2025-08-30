@@ -1,10 +1,10 @@
 # Verificar si yt-dlp está instalado
 if (-not (Get-Command yt-dlp -ErrorAction SilentlyContinue)) {
-    Write-Host "[!] yt-dlp no encontrado. Instalando con pip..."
+    Write-Host "[!] yt-dlp not found..."
     try {
         python -m pip install -U yt-dlp
     } catch {
-        Write-Host "[X] Error al instalar yt-dlp."
+        Write-Host "[X] Error"
         exit 1
     }
 }
