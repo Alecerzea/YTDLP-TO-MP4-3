@@ -2,10 +2,10 @@
 REM Verificar si yt-dlp está instalado
 where yt-dlp >nul 2>&1
 if errorlevel 1 (
-    echo [!] yt-dlp no encontrado. Instalando con pip...
+    echo [!] yt-dlp not installed, trying to install it with pip...
     python -m pip install -U yt-dlp
     if errorlevel 1 (
-        echo [X] Error al instalar yt-dlp.
+        echo [X] Error.
         exit /b 1
     )
 )
