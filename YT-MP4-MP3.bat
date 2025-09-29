@@ -1,14 +1,4 @@
 @echo off
-REM Verify ytdlp
-where yt-dlp >nul 2>&1
-if errorlevel 1 (
-    echo [!] yt-dlp not installed, trying to install it with pip...
-    python -m pip install -U yt-dlp
-    if errorlevel 1 (
-        echo [X] Error.
-        exit /b 1
-    )
-)
 
 REM Solicit URL
 set /p mediaURL=Enter media URL: 
