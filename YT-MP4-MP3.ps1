@@ -1,13 +1,3 @@
-if (-not (Get-Command yt-dlp -ErrorAction SilentlyContinue)) {
-    Write-Host "[!] yt-dlp not found..."
-    try {
-        python -m pip install -U yt-dlp
-    } catch {
-        Write-Host "[X] Error"
-        exit 1
-    }
-}
-
 $mediaURL = Read-Host "Enter media URL"
 $type = Read-Host "Is this a video or audio? (v/a)"
 $timestamp = Get-Date -UFormat %s
