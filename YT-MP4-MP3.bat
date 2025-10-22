@@ -15,4 +15,3 @@ if /i "%type%"=="v" (
 )
 
 pause
-
