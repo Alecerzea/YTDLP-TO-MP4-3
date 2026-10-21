@@ -3,4 +3,4 @@ Some Script that you can simply launch from cmd and powershell to download any v
 
 yt-dlp --cookies-from-browser firefox -f "bv*[height=1080]+ba/b[height=1080][ext=mp4]" --merge-output-format mp4
 
-yt-dlp -x --audio-format mp3
+yt-dlp --cookies-from-browser firefox -x --audio-format mp3
